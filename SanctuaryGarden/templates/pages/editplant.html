@@ -1,0 +1,88 @@
+
+{% load static %}
+{% block content %}
+<style>
+  body {
+    background-color: #ccff99;
+    font-family: 'Arial', sans-serif;
+  }
+
+  #plantcare-form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+
+    border-radius: 5px;
+    background-color: #f5f5f5; /* Light Grey Background Color */
+  }
+
+  button {
+    background-color: #000;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+</style>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div id="plantcare-form">
+    <H1>Add Plant Care Guide</H1>
+    <form method="post" action="{% url 'editplant' mem.id %}" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <label for="plant_name">Plant Name:</label>
+      <input type="text" id="plant_name" name="plant_name" value="{{ mem.plant_name}}">
+
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" >{{ mem.description}}</textarea>
+
+      <label for="seasonal">Seasonal:</label>
+      <input type="text" id="seasonal" name="seasonal"  value="{{ mem.seasonal}}">
+
+      <label for="guide">Guide:</label>
+      <textarea id="guide" name="guide" >{{ mem.description}}</textarea>
+
+      <label for="admin_name">Creator Name:</label>
+      <input type="text" id="admin_name" name="admin_name" value="{{ mem.admin_name}}">
+
+      <label for="uploadImage">Photo:</label>
+      <input type="file" id="uploadImage" name="photo" accept="image/*" >
+
+      <input type="text" id="status" name="status" value="{{ mem.status}}" hidden>
+
+      <div class="flex justify-end mt-4">
+
+  <button class="done-button">Update</button>
+
+      </div>
+    </form>
+</div>
+{% endblock %}

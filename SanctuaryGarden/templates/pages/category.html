@@ -1,0 +1,49 @@
+{% extends 'pages/index.html' %}
+{% load static %}
+{% block content %}
+<style>
+body {
+    background-color: #ccff99;
+}
+
+
+  .done-button {
+    background-color: #000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+
+</style>
+
+<div class="bg-gray-100">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
+
+            <h2 class="text-2xl font-bold text-gray-900">Plants</h2>
+      {% csrf_token %}
+
+
+            <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
+                {% for abc in plantcareguide %}
+                <div class="group relative">
+                     <div class="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+            {% if abc.photo %}
+                <img src="{{ abc.photo.url }}" alt="" class="h-full w-full object-cover object-center" width="300" height="300">
+            {% else %}
+                <!-- Provide a default image or alternative content -->
+                <p>No photo available</p>
+            {% endif %}
+        </div>
+                    <a href=" {% url 'PlantCareGuidePage' abc.id %}">
+                        <p class="text-base font-semibold text-gray-900">{{ abc.plant_name }}</p>
+
+                  </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
